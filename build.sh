@@ -8,13 +8,13 @@ DEFAULT_TARGET="wasm"   # audioworkletprocessor, wasm or js (default=wasm)
 
 TARGET=${TARGET:-"$DEFAULT_TARGET"}
 
-# set RECOMPILE=0 to reuse image without (re)compiling, e.g. to use different emscripten target
+# set NO_REBUILD=0 to reuse image without (re)compiling, e.g. to use different emscripten target
 
-if [ "${RECOMPILE:-0}" -eq 1 ];then
+if [ "${NO_REBUILD:-0}" -eq 1 ];then
   docker build --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ --build-arg FILE=libopenmpt-${VERSION}+release --build-arg CORES=${CORES} --build-arg TARGET="${TARGET}" --tag emscripten:libopenmpt .
 fi
 
-{ docker rm mpt || true; } && docker create --name mpt emscripten:libopenmpt
+docker rm mpt || true; docker create --name mpt emscripten:libopenmpt
 
 if [ "$TARGET" = "audioworkletprocessor" ]; then
   docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.worklet.js
@@ -30,7 +30,7 @@ if [ "$TARGET" = "js" ]; then
   docker cp mpt:/src/libopenmpt/bin/libopenmpt.js.mem libopenmpt.js.mem
 fi
 
-if [ "${CLEANUP:-0}" -eq 1 ];then
+if [ "${CLEANUP:-0}" -eq 1 ]; then
   docker rm mpt
   docker rmi emscripten:libopenmpt
   docker rmi emscripten/emsdk:latest
