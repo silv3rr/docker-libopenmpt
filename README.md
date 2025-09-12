@@ -1,10 +1,14 @@
-# Docker libopenmpt
+# docker-libopenmpt
 
 Build updated libopenmpt versions inside a docker container, for [WMPlay](https://github.com/silv3rr/chiptune2.js/tree/wmplay) and other javascript web players.
+
+After building just replace the libopenmpt.js file to update (and/or worklet or wasm files).
 
 Original by [DrSnuggles](DrSnuggles), included with [chiptune3](https://github.com/DrSnuggles/chiptune/tree/v3/docker)
 
 ## Build
+
+Github: [Download](https://github.com/silv3rr/docker-libopenmpt/releases) (created by [Action](https://github.com/silv3rr/docker-libopenmpt/blob/main/.github/workflows/docker.yml))
 
 Linux: run `make.sh`
 
@@ -39,10 +43,10 @@ Additional `EXPORTED_FUNCTIONS`, `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE` and `EXPORTE
 
 #### Changelog
 
-- 3.1.21 writeAsciiToMemory removed, added to exports (TODO: replace)
-- 3.1.5x update EXPORTED_FUNCTIONS
-- 3.1.57 update DEFAULT_LIBRARY_FUNCS_TO_INCLUDE
-- 4.0.7 no HEAP8,HEAPU32 export by default, add to `EXPORTED_FUNCTIONS`
+- 3.1.21 `writeAsciiToMemory` removed, added to exports (TODO: replace)
+- 3.1.5x update `EXPORTED_FUNCTIONS`
+- 3.1.57 update `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE`
+- 4.0.7 no `HEAP8,HEAPU32` export by default, add to `EXPORTED_FUNCTIONS`
 - 4.0.1x add `HEAP8,HEAPU8,HEAPU32,HEAPF32` to `EXPORTED_RUNTIME_METHODS`
 - 4.0.15 works with libopenmpt-0.8.3
 
@@ -50,12 +54,12 @@ Additional `EXPORTED_FUNCTIONS`, `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE` and `EXPORTE
 
 This can be done at any time in a "standalone" container, separately from build.
 
-To minify chiptune3.js:
-
-`docker run --rm --workdir /build -v "$PWD:/build" node:latest sh -c 'npm install terser; npm run minify; rm -rf node_modules package-lock.json'`
-
-To apply Brotli compression:
+Brotli compression:
 
 `docker run --rm --workdir /build -v "$PWD:/build" alpine:latest sh -c 'apk add brotli && brotli -f *.min.js libopenmpt.worklet.js libopenmpt.js libopenmpt.wasm 2>/dev/null'`
 
-_(build scripts also do this)_
+(the build scripts also do this)
+
+_Minify chiptune3.js:_
+
+_`docker run --rm --workdir /build -v "$PWD:/build" node:latest sh -c 'npm install terser; npm run minify; rm -rf node_modules package-lock.json'`_
