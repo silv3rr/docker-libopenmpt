@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker-image:
-    name: Build Docker image
+  build:
+    name: Build empscripten
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,8 +21,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build
+      - name: Build libopenmpt target wasm
         run: bash -x build.sh
+      - name: Build libopenmpt target js
+        run: REBUILD=0 TARGET=js bash -x build.sh
+      - name: Build libopenmpt target audioworkletprocessor
+        run: REBUILD=0 TARGET=audioworkletprocessor bash -x build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
@@ -35,7 +39,7 @@ jobs:
   create-release:
     name: Get artifacts, create release
     runs-on: ubuntu-latest
-    needs: docker-image
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - name: Download artifacts
@@ -44,8 +48,8 @@ jobs:
           path: build-artifacts
       - name: Create release using 'gh'
         run: |
-          gh release create libopenmpt-emscripten$(date +%Y%m%d) $(find -type f -printf '%p ') --notes-file - <<'#####'
-          libopenmpt empscripten (js)
+          gh release create libopenmpt $(find -type f -printf '%p ') --notes-file - <<'#####'
+          libopenmpt emscripten (js)
           
           #####
         working-directory: ./build-artifacts
