@@ -1,0 +1,5 @@
+archive/
+libopenmpt.js
+libopenmpt.wasm
+libopenmpt.js.mem
+libopenmpt.worklet.js
