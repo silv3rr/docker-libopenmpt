@@ -5,10 +5,11 @@ CORES=8                 # use <num> cpu cores to compile, change to match your c
 CLEANUP=0               # set to 1 to remove docker container and images (default=0)
 LOCAL_MINI=0            # run minify/brotli locally(0) or in container(1) (default=0)
 DEFAULT_TARGET="wasm"   # audioworkletprocessor, wasm or js (default=wasm)
+LOCAL_MINI=0            # set to 1 to run brotli locally instead of in container (default=0)
 
 TARGET=${TARGET:-"$DEFAULT_TARGET"}
 
-# set REBUILD=0 to reuse image without (re)compiling, e.g. to use different emscripten target
+# set env var REBUILD=0 to reuse image without (re)compiling, e.g. for CI to use different emscripten target
 
 if [ "${REBUILD:-1}" -eq 1 ];then
   docker build --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ --build-arg FILE=libopenmpt-${VERSION}+release --build-arg CORES=${CORES} --build-arg TARGET="${TARGET}" --tag emscripten:libopenmpt .

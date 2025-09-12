@@ -9,7 +9,7 @@ SET /A CLEANUP=0
 SET /A LOCAL_MINI=0
 
 docker build --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ --build-arg FILE=libopenmpt-%VERSION%+release --build-arg CORES=%CORES% --build-arg TARGET=%TARGET% --tag emscripten:libopenmpt .
-docker rm mpt && docker create --name mpt emscripten:libopenmpt
+docker rm mpt & docker create --name mpt emscripten:libopenmpt
 
 IF "%TARGET%"=="audioworkletprocessor" (
   docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.worklet.js
