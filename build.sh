@@ -14,7 +14,7 @@ if [ "${RECOMPILE:-0}" -eq 1 ];then
   docker build --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ --build-arg FILE=libopenmpt-${VERSION}+release --build-arg CORES=${CORES} --build-arg TARGET="${TARGET}" --tag emscripten:libopenmpt .
 fi
 
-docker rm mpt && docker create --name mpt emscripten:libopenmpt
+{ docker rm mpt || true; } && docker create --name mpt emscripten:libopenmpt
 
 if [ "$TARGET" = "audioworkletprocessor" ]; then
   docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.worklet.js
