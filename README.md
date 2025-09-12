@@ -8,7 +8,7 @@ Original by [DrSnuggles](DrSnuggles), included with [chiptune3](https://github.c
 
 ## Build
 
-Github: [Download](https://github.com/silv3rr/docker-libopenmpt/releases) (created by [Action](https://github.com/silv3rr/docker-libopenmpt/blob/main/.github/workflows/docker.yml))
+Github: [Download](https://github.com/silv3rr/docker-libopenmpt/releases) (created by [Action](https://github.com/silv3rr/docker-libopenmpt/blob/main/.github/workflows/build.yml))
 
 Linux: run `make.sh`
 
