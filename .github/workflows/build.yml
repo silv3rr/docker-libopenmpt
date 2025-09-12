@@ -21,8 +21,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Pull image
-        run: docker pull emscripten/emsdk:latest
       - name: Build
         run: bash -x build.sh
       - uses: actions/upload-artifact@v4

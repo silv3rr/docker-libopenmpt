@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 VERSION=0.8.3           # libopenmpt version
 CORES=8                 # use <num> cpu cores to compile, change to match your cpu (default=8)
