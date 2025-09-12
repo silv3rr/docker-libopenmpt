@@ -44,7 +44,7 @@ jobs:
           path: build-artifacts
       - name: Create release using 'gh'
         run: |
-          gh release create libopenmpt $(find -type f -printf '%p ') --notes-file - <<'#####'
+          gh release create libopenmpt-emscripten $(find -type f -printf '%p ') --notes-file - <<'#####'
           libopenmpt empscripten (js)
           
           #####
