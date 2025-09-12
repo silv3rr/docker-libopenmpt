@@ -8,9 +8,9 @@ DEFAULT_TARGET="wasm"   # audioworkletprocessor, wasm or js (default=wasm)
 
 TARGET=${TARGET:-"$DEFAULT_TARGET"}
 
-# set NO_REBUILD=0 to reuse image without (re)compiling, e.g. to use different emscripten target
+# set REBUILD=0 to reuse image without (re)compiling, e.g. to use different emscripten target
 
-if [ "${NO_REBUILD:-0}" -eq 1 ];then
+if [ "${REBUILD:-1}" -eq 1 ];then
   docker build --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ --build-arg FILE=libopenmpt-${VERSION}+release --build-arg CORES=${CORES} --build-arg TARGET="${TARGET}" --tag emscripten:libopenmpt .
 fi
 
