@@ -47,12 +47,12 @@ Additional `EXPORTED_FUNCTIONS`, `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE` and `EXPORTE
 
 #### Changelog
 
-- 3.1.21 `writeAsciiToMemory` removed, added to exports (TODO: replace)
-- 3.1.5x update `EXPORTED_FUNCTIONS`
-- 3.1.57 update `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE`
-- 4.0.7 no `HEAP8,HEAPU32` export by default, add to `EXPORTED_FUNCTIONS`
-- 4.0.1x add `HEAP8,HEAPU8,HEAPU32,HEAPF32` to `EXPORTED_RUNTIME_METHODS`
 - 4.0.15 works with libopenmpt-0.8.3
+- 4.0.1x add `HEAP8,HEAPU8,HEAPU32,HEAPF32` to `EXPORTED_RUNTIME_METHODS`
+- 4.0.7 no `HEAP8,HEAPU32` export by default, add to `EXPORTED_FUNCTIONS`
+- 3.1.57 update `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE`
+- 3.1.5x update `EXPORTED_FUNCTIONS`
+- 3.1.21 `writeAsciiToMemory` removed, added to exports (TODO: replace)
 
 ## Minifying
 
