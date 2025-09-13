@@ -27,7 +27,7 @@ VERSION=0.8.3   # libopenmpt version
 CORES=8         # use <num> cpu cores to compile, change to match your cpu (default=8)
 TARGET=wasm     # audioworkletprocessor, wasm or js (default=wasm)
 CLEANUP=0       # set to 1 to remove docker container and images (default=0)
-LOCAL_MINI=0    # run minify/brotli locally(0) or in container(1) (default=0)
+LOCAL_MINI=0    # set to 1 to run brotli locally instead of in container (default=0)
 ```
 
 ## Sources
