@@ -30,7 +30,11 @@ CLEANUP=0       # set to 1 to remove docker container and images (default=0)
 LOCAL_MINI=0    # run minify/brotli locally(0) or in container(1) (default=0)
 ```
 
+## Sources
+
 ### Emscripten
+
+Image: [https://hub.docker.com/r/emscripten/emsdk](https://hub.docker.com/r/emscripten/emsdk)
 
 For changes, watch: [https://github.com/emscripten-core/emscripten/blob/main/ChangeLog.md](https://github.com/emscripten-core/emscripten/blob/main/ChangeLog.md)
 
@@ -40,13 +44,15 @@ Releases: [https://lib.openmpt.org/files/libopenmpt/src/](https://lib.openmpt.or
 
 Autobuilds: https://builds.openmpt.org/builds/auto/libopenmpt/src.makefile/
 
-### Dockerfile
+## Dockerfile
+
+Uses latest emsdk image and `libopenmpt-${VERSION}+release`.
 
 Additional `EXPORTED_FUNCTIONS`, `DEFAULT_LIBRARY_FUNCS_TO_INCLUDE` and `EXPORTED_RUNTIME_METHODS` can be changed in Dockerfile or passed as `--build-args` in build scripts.
 
 ## Changelog
 
-4.0.15 works with libopenmpt-0.8.3
+empscripten 4.0.15 works with libopenmpt-0.8.3
 
 - 4.0.1x add `HEAP8,HEAPU8,HEAPU32,HEAPF32` to `EXPORTED_RUNTIME_METHODS`
 - 4.0.7 add `HEAP8,HEAPU32` to `EXPORTED_FUNCTIONS` (no longer exported by default)
