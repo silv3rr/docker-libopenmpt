@@ -1,6 +1,6 @@
 # docker-libopenmpt
 
-Build updated libopenmpt versions inside a docker container, for [WMPlay](https://github.com/silv3rr/chiptune2.js/tree/wmplay) and other javascript web players.
+Build updated [libopenmpt](https://lib.openmpt.org/libopenmpt/) versions inside a docker container, for [WMPlay](https://github.com/silv3rr/chiptune2.js/tree/wmplay) and other javascript web players.
 
 After building just replace the libopenmpt.js file to update (and/or worklet or wasm files).
 
@@ -8,11 +8,13 @@ Original by [DrSnuggles](DrSnuggles), included with [chiptune3](https://github.c
 
 ## Build
 
-Github: [Download](https://github.com/silv3rr/docker-libopenmpt/releases) (created by [Action](https://github.com/silv3rr/docker-libopenmpt/blob/main/.github/workflows/build.yml))
+Github: [Download](https://github.com/silv3rr/docker-libopenmpt/releases) from Releases (created by [Action](https://github.com/silv3rr/docker-libopenmpt/blob/main/.github/workflows/build.yml))
+
+Or, clone this repo and run build script locally
 
 Linux: run `make.sh`
 
-Windows: run `make.bat` (e.g. Docker Desktop)
+Windows: run `make.bat` (tested with [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/))
 
 Compiling takes ~10 minutes on 'modern' 8 core cpu (2025).
 
@@ -26,9 +28,11 @@ CLEANUP=0       # set to 1 to remove docker container and images (default=0)
 LOCAL_MINI=0    # run minify/brotli locally(0) or in container(1) (default=0)
 ```
 
-## Emscripten
+### Emscripten
 
 For changes, watch: [https://github.com/emscripten-core/emscripten/blob/main/ChangeLog.md](https://github.com/emscripten-core/emscripten/blob/main/ChangeLog.md)
+
+### Libopenmpt
 
 Releases: https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-0.7.4+release.makefile.tar.gz
 
