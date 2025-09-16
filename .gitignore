@@ -1,5 +1,7 @@
 archive/
 libopenmpt.js
+libopenmpt_wasm.js
 libopenmpt.wasm
 libopenmpt.js.mem
 libopenmpt.worklet.js
+*.br

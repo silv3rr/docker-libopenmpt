@@ -7,7 +7,7 @@ on:
       - '**'
       - '!.github/**'
       - '!.gitignore'
-      - '!README.md'
+      - '!*.md'
   pull_request:
   workflow_dispatch:
 

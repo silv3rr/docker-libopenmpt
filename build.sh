@@ -12,24 +12,36 @@ TARGET=${TARGET:-"$DEFAULT_TARGET"}
 # set env var REBUILD=0 to reuse image without (re)compiling, e.g. for CI to use different emscripten target
 
 if [ "${REBUILD:-1}" -eq 1 ];then
-  docker build --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ --build-arg FILE=libopenmpt-${VERSION}+release --build-arg CORES=${CORES} --build-arg TARGET="${TARGET}" --tag emscripten:libopenmpt .
+  docker build \
+    --progress=plain \
+    --cache-from emscripten:libopenmpt \
+    --build-arg BASE=https://lib.openmpt.org/files/libopenmpt/src/ \
+    --build-arg FILE=libopenmpt-${VERSION}+release \
+    --build-arg CORES=${CORES} \
+    --build-arg TARGET="${TARGET}" \
+    --tag emscripten:libopenmpt . || { echo "ERROR: docker build"; exit 1; }
 fi
 
 docker rm mpt || true; docker create --name mpt emscripten:libopenmpt
 
-if [ "$TARGET" = "audioworkletprocessor" ]; then
-  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.worklet.js
+if [ "$TARGET" = "js" ]; then
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.js
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js.br libopenmpt.js.br
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js.mem libopenmpt.js.mem
 fi
 
 if [ "$TARGET" = "wasm" ]; then
-  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.js
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt_wasm.js
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js.br libopenmpt_wasm.js
   docker cp mpt:/src/libopenmpt/bin/libopenmpt.wasm libopenmpt.wasm
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.wasm.br libopenmpt.wasm.br
 fi
 
-if [ "$TARGET" = "js" ]; then
-  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.js
-  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js.mem libopenmpt.js.mem
+if [ "$TARGET" = "audioworkletprocessor" ]; then
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js libopenmpt.worklet.js
+  docker cp mpt:/src/libopenmpt/bin/libopenmpt.js.br libopenmpt.worklet.js.br
 fi
+
 
 if [ "${CLEANUP:-0}" -eq 1 ]; then
   docker rm mpt
@@ -38,5 +50,5 @@ if [ "${CLEANUP:-0}" -eq 1 ]; then
 fi
 
 if [ "${LOCAL_MINI:-0}" -eq 1 ]; then
-  brotli -f ./*.min.js libopenmpt.worklet.js
+  for i in libopenmpt.js libopenmpt.wasm; do test -s $i && brotli -f $i; done
 fi

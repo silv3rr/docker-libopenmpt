@@ -18,7 +18,7 @@ Linux: run `make.sh`
 
 Windows: run `make.bat` (tested with [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/))
 
-Compiling takes ~10 minutes on 'modern' 8 core cpu (2025).
+Compiling takes anywhere from 5-10 minutes on a 'modern' avg. 8 core cpu (2025).
 
 There are a few options you can set inside the scripts:
 
