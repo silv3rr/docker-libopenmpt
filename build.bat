@@ -2,7 +2,7 @@
 
 REM :: See build.sh header for info
 
-SET VERSION=0.8.3
+SET VERSION=0.8.4
 SET CORES=8
 SET TARGET=wasm
 SET /A CLEANUP=0

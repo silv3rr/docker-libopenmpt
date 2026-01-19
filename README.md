@@ -14,9 +14,9 @@ Get files from [Releases](https://github.com/silv3rr/docker-libopenmpt/releases)
 
 To build locally, clone this repo and run build script
 
-Linux: run `make.sh`
+Linux: run `build.sh`
 
-Windows: run `make.bat` (tested with [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/))
+Windows: run `build.bat` (tested with [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/))
 
 Compiling takes anywhere from 5-10 minutes on a 'modern' avg. 8 core cpu (2025).
 
